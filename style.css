@@ -698,3 +698,8 @@ header:hover .profile-image-container {
     padding: 12px 0;
   }
 }
+/* Fix: keep portfolio content visible */
+.reveal {
+    opacity: 1;
+    transform: none;
+}

@@ -52,3 +52,91 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     document.querySelector(".menu-icon").classList.remove("change");
   });
 });
+// ================================
+// Mobile Menu
+// ================================
+function toggleMenu() {
+    const navLinks = document.getElementById("navLinks");
+    const menuIcon = document.querySelector(".menu-icon");
+
+    navLinks.classList.toggle("active");
+    menuIcon.classList.toggle("change");
+}
+
+
+// ================================
+// Reveal Animations
+// ================================
+function revealVisibleSections() {
+    const reveals = document.querySelectorAll(".reveal");
+    const windowHeight = window.innerHeight;
+    const revealPoint = 100;
+
+    reveals.forEach((el) => {
+        const elementTop = el.getBoundingClientRect().top;
+        const elementBottom = el.getBoundingClientRect().bottom;
+
+        if (
+            elementTop < windowHeight - revealPoint &&
+            elementBottom > revealPoint
+        ) {
+            el.classList.add("active");
+        }
+    });
+}
+
+
+// ================================
+// Page Load
+// ================================
+window.addEventListener("load", () => {
+    // Immediately reveal sections visible when page opens
+    revealVisibleSections();
+});
+
+
+// ================================
+// Scroll Effects
+// ================================
+window.addEventListener("scroll", () => {
+
+    // Scroll-to-top button
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+    if (scrollTopBtn) {
+        scrollTopBtn.style.display =
+            window.scrollY > 300 ? "block" : "none";
+    }
+
+    // Reveal sections while scrolling
+    revealVisibleSections();
+});
+
+
+// ================================
+// Scroll to Top
+// ================================
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+if (scrollTopBtn) {
+    scrollTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+}
+
+
+// ================================
+// Close Mobile Menu After Clicking
+// ================================
+document.querySelectorAll(".nav-links a").forEach((link) => {
+    link.addEventListener("click", () => {
+        const navLinks = document.getElementById("navLinks");
+        const menuIcon = document.querySelector(".menu-icon");
+
+        navLinks.classList.remove("active");
+        menuIcon.classList.remove("change");
+    });
+});
